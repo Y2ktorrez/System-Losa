@@ -1,10 +1,11 @@
 from tkinter import Tk, Frame  
 from container import Container
+from ttkthemes import ThemedStyle
 
 class Manager(Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.title("Nombre de la Empresa") #Cambiaar el nombre
+        self.title("Vigueplast") 
         self.resizable(False, False)
         self.configure(bg="#C6D9E3")
         
@@ -26,9 +27,10 @@ class Manager(Tk):
             Container: None
         }
         
-        # Con estas dos llamadas podemos ver lo que hay en el container
         self.load_frame()
         self.show_frame(Container)
+        
+        self.set_theme()
         
     def load_frame(self):
         for FrameClass in self.frames.keys():
@@ -38,6 +40,10 @@ class Manager(Tk):
     def show_frame(self, frame_class):
         frame = self.frames[frame_class]
         frame.tkraise() 
+
+    def set_theme(self):
+        styles = ThemedStyle(self)
+        styles.set_theme("adapta")  
 
 def main():
     app = Manager()

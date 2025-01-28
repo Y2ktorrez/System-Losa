@@ -4,7 +4,7 @@ from ventas import Ventas
 from cotizacion import Cotizacion
 from PIL import Image, ImageTk
 
-class Container(tk.Frame):  # Cambiado a Frame para que funcione con Manager
+class Container(tk.Frame):  
     def __init__(self, padre, controlador):
         super().__init__(padre, bg="#C6D9E3")
         self.controlador = controlador
@@ -12,7 +12,7 @@ class Container(tk.Frame):  # Cambiado a Frame para que funcione con Manager
         self.widgets()
 
     def show_frames(self, container):
-        self.controlador.withdraw()  # Oculta la ventana principal
+        self.controlador.withdraw()  
         new_window = container(self.controlador)
         new_window.mainloop()
 
@@ -39,5 +39,5 @@ class Container(tk.Frame):  # Cambiado a Frame para que funcione con Manager
         self.logo_label = tk.Label(frame1, image=self.logo_image, bg="#C6D9E3")
         self.logo_label.place(x=100, y=30)
 
-        copyright_label = tk.Label(frame1, text="Copyright © 2025", font="sans 12 bold", bg="#C6D9E3", fg="gray")
+        copyright_label = tk.Label(frame1, text="© 2025 Vigueplast. Todos los Derechos Reservados", font="sans 12 bold", bg="#C6D9E3", fg="gray")
         copyright_label.place(x=180, y=350)
