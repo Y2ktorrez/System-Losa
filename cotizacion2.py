@@ -33,10 +33,19 @@ class MaterialApoyo(tk.Toplevel):
         pdf = FPDF()
         pdf.add_page()
 
-        # Encabezado grande y en negrita
-        pdf.set_font("Arial", style="B", size=16)
-        pdf.cell(200, 10, txt="Cotización", ln=True, align="C")
-        pdf.ln(10)
+        # Encabezado con título centrado
+        pdf.set_font("Arial", style="B", size=18)
+        pdf.cell(0, 10, txt="Cotización", ln=True, align='C')  # Título centrado
+        pdf.ln(5)  # Espacio después del título
+
+        # Fecha: "Fecha:" en negrita, la fecha normal
+        pdf.set_font("Arial", style="B", size=12)
+        pdf.cell(20, 10, txt="Fecha: ", ln=False)  # "Fecha:" en negrita
+
+        pdf.set_font("Arial", style="", size=12)  # Quitar negrita para la fecha
+        fecha = self.master.entries['Fecha'].get()
+        pdf.cell(0, 10, txt=fecha, ln=True)  # Fecha normal
+        pdf.ln(10)  # Espacio después del encabezado
 
         # Información del cliente
         pdf.set_font("Arial", style="B", size=14)
@@ -45,7 +54,8 @@ class MaterialApoyo(tk.Toplevel):
         pdf.cell(200, 10, txt=f"Nombre: {self.master.entries['Nombre(s)'].get()}", ln=True)
         pdf.cell(200, 10, txt=f"Teléfono: {self.master.entries['Teléfono'].get()}", ln=True)
         pdf.cell(200, 10, txt=f"Dirección: {self.master.entries['Dirección'].get()}", ln=True)
-        pdf.cell(200, 10, txt=f"Fecha: {self.master.entries['Fecha'].get()}", ln=True)
+        pdf.cell(200, 10, txt=f"Presente: {self.master.entries['Presente'].get()}", ln=True)
+        pdf.cell(200, 10, txt=f"Referencia: {self.master.entries['Referencia'].get()}", ln=True)
         pdf.ln(10)
 
         # Información de la losa
@@ -81,17 +91,23 @@ class MaterialApoyo(tk.Toplevel):
             pdf.cell(200, 10, txt=f"{key}: {entry.get()}", ln=True)
         pdf.ln(10)
 
-        # Obtener el nombre del cliente para el nombre del archivo
+        # Datos técnicos adicionales
+        pdf.set_font("Arial", style="B", size=14)
+        pdf.cell(200, 10, txt="Datos Técnicos Adicionales", ln=True)
+        pdf.set_font("Arial", size=12)
+        for key, entry in self.carga_entries.items():
+            pdf.cell(200, 10, txt=f"{key}: {entry.get()}", ln=True)
+        pdf.ln(10)
+
+        # Guardar PDF
         nombre_cliente = self.master.entries['Nombre(s)'].get().strip().replace(" ", "_")
         if not nombre_cliente:
-            nombre_cliente = "Cotizacion"  # Nombre por defecto si no hay nombre de cliente
+            nombre_cliente = "Cotizacion"
 
-        # Guardar el PDF en la carpeta de descargas
         downloads_path = str(Path.home() / "Downloads")
         pdf_file = os.path.join(downloads_path, f"{nombre_cliente}_cotizacion.pdf")
         pdf.output(pdf_file)
 
-        # Abrir el PDF automáticamente
         os.system(f"start {pdf_file}")
 
     def widgets(self):
