@@ -99,16 +99,16 @@ class Cotizacion(tk.Toplevel):
         carga_frame = LabelFrame(losas_frame, text="Carga", bg="#C6D9E3", font="sans 14 bold")
         carga_frame.place(x=580, y=20, width=320, height=130) 
 
-        carga_labels = ["Carga Muerta:", "Carga Viva:"]
+        carga_labels = ["Carga Muerta (Kg/m2):", "Carga Viva (Kg/m2):"]
         self.carga_entries = {}
 
         carga_y = 30 
         for label in carga_labels:
             lbl = tk.Label(carga_frame, text=label, bg="#C6D9E3", font="sans 12 bold", anchor="w")
-            lbl.place(x=20, y=carga_y, width=120, height=25) 
+            lbl.place(x=20, y=carga_y, width=180, height=25) 
 
             entry = tk.Entry(carga_frame, font="sans 12")
-            entry.place(x=150, y=carga_y, width=100, height=25)
+            entry.place(x=210, y=carga_y, width=100, height=25)
 
             self.carga_entries[label.strip(":")] = entry
             carga_y += 40 

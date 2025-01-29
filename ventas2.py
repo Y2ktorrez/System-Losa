@@ -62,9 +62,21 @@ class MaterialApoyo(tk.Toplevel):
         pdf.set_font("Arial", style="B", size=14)
         pdf.cell(200, 10, txt="Características de la Losa", ln=True)
         pdf.set_font("Arial", size=12)
+
         for key, entry in self.master.losa_entries.items():
-            if "Unidad" not in key:
-                pdf.cell(200, 10, txt=f"{key}: {entry.get()}", ln=True)
+            if "Unidad" in key:
+                continue  # Saltamos las unidades por ahora
+
+            valor = entry.get()  # Obtener el valor numérico
+            unidad_key = f"{key} Unidad"  # Buscar la unidad correspondiente
+            unidad = self.master.losa_entries.get(unidad_key, None)
+
+            if unidad:  # Si hay una unidad seleccionada, la agregamos
+                unidad_texto = unidad.get()
+            else:
+                unidad_texto = ""
+
+            pdf.cell(200, 10, txt=f"{key}: {valor} {unidad_texto}", ln=True)
         pdf.ln(10)
 
         # Información de la carga
