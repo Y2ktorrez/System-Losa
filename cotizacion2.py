@@ -163,7 +163,7 @@ class MaterialApoyo(tk.Toplevel):
             lbl = tk.Label(cotizacion_frame, text=label, bg="#C6D9E3", font="sans 12 bold", anchor="w")
             lbl.place(x=x_label, y=y_position, width=200, height=25)
 
-            entry = tk.Entry(cotizacion_frame, font="sans 12")
+            entry = tk.Entry(cotizacion_frame, font="sans 14")
             entry.place(x=x_entry, y=y_position, width=80, height=25)
 
             self.entries[label.strip(":")] = entry
@@ -188,7 +188,7 @@ class MaterialApoyo(tk.Toplevel):
             lbl = tk.Label(dato_frame, text=label, bg="#C6D9E3", font="sans 10 bold", anchor="w")
             lbl.place(x=50, y=carga_y, width=200, height=25)
 
-            entry = tk.Entry(dato_frame, font="sans 12")
+            entry = tk.Entry(dato_frame, font="sans 14")
             entry.place(x=270, y=carga_y, width=50, height=25)
 
             self.carga_entries[label.strip(":")] = entry

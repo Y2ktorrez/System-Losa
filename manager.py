@@ -1,6 +1,8 @@
 from tkinter import Tk, Frame  
 from container import Container
 from ttkthemes import ThemedStyle
+import sys
+import os
 
 class Manager(Tk):
     def __init__(self, *args, **kwargs):
@@ -8,6 +10,10 @@ class Manager(Tk):
         self.title("Vigueplast") 
         self.resizable(False, False)
         self.configure(bg="#C6D9E3")
+
+        #Darle el icono al ejecutable
+        ruta=self.rutas(r"icono.ico")
+        self.iconbitmap(ruta)
         
         window_width = 800
         window_height = 400
@@ -31,7 +37,14 @@ class Manager(Tk):
         self.show_frame(Container)
         
         self.set_theme()
-        
+    
+    def rutas(self, ruta):
+        try:
+            rutabase=sys.__MEIPASS
+        except Exception:
+            rutabase=os.path.abspath(".")
+        return os.path.join(rutabase,ruta)
+
     def load_frame(self):
         for FrameClass in self.frames.keys():
             frame = FrameClass(self.container, self)

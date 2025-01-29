@@ -35,7 +35,7 @@ class MaterialApoyo(tk.Toplevel):
 
         # Encabezado con título centrado
         pdf.set_font("Arial", style="B", size=18)
-        pdf.cell(0, 10, txt="Cotización", ln=True, align='C')  # Título centrado
+        pdf.cell(0, 10, txt="Venta", ln=True, align='C')  # Título centrado
         pdf.ln(5)  # Espacio después del título
 
         # Fecha: "Fecha:" en negrita, la fecha normal
@@ -97,7 +97,7 @@ class MaterialApoyo(tk.Toplevel):
 
         # Cotización total
         pdf.set_font("Arial", style="B", size=14)
-        pdf.cell(200, 10, txt="Cotización Total", ln=True)
+        pdf.cell(200, 10, txt="Costo Total", ln=True)
         pdf.set_font("Arial", size=12)
         for key, entry in self.entries.items():
             pdf.cell(200, 10, txt=f"{key}: {entry.get()}", ln=True)
@@ -114,10 +114,10 @@ class MaterialApoyo(tk.Toplevel):
         # Guardar PDF
         nombre_cliente = self.master.entries['Nombre(s)'].get().strip().replace(" ", "_")
         if not nombre_cliente:
-            nombre_cliente = "Cotizacion"
+            nombre_cliente = "Ventas"
 
         downloads_path = str(Path.home() / "Downloads")
-        pdf_file = os.path.join(downloads_path, f"{nombre_cliente}_cotizacion.pdf")
+        pdf_file = os.path.join(downloads_path, f"{nombre_cliente}_venta.pdf")
         pdf.output(pdf_file)
 
         os.system(f"start {pdf_file}")
@@ -149,7 +149,7 @@ class MaterialApoyo(tk.Toplevel):
             self.material_vars[material] = var
             y_position += 40
 
-        cotizacion_frame = LabelFrame(self, text="Cotización Total", bg="#C6D9E3", font="sans 14 bold")
+        cotizacion_frame = LabelFrame(self, text="Costo Total", bg="#C6D9E3", font="sans 14 bold")
         cotizacion_frame.place(x=20, y=360, width=self.winfo_screenwidth() - 40, height=340)
 
         labels = ["Area (m2):", "COMP. PLASTOFOR N°:", "Total (m2):", "Precio Bs/m2:", "Precio total Bs:"]
@@ -163,7 +163,7 @@ class MaterialApoyo(tk.Toplevel):
             lbl = tk.Label(cotizacion_frame, text=label, bg="#C6D9E3", font="sans 12 bold", anchor="w")
             lbl.place(x=x_label, y=y_position, width=200, height=25)
 
-            entry = tk.Entry(cotizacion_frame, font="sans 12")
+            entry = tk.Entry(cotizacion_frame, font="sans 14")
             entry.place(x=x_entry, y=y_position, width=80, height=25)
 
             self.entries[label.strip(":")] = entry
@@ -188,7 +188,7 @@ class MaterialApoyo(tk.Toplevel):
             lbl = tk.Label(dato_frame, text=label, bg="#C6D9E3", font="sans 10 bold", anchor="w")
             lbl.place(x=50, y=carga_y, width=200, height=25)
 
-            entry = tk.Entry(dato_frame, font="sans 12")
+            entry = tk.Entry(dato_frame, font="sans 14")
             entry.place(x=270, y=carga_y, width=50, height=25)
 
             self.carga_entries[label.strip(":")] = entry

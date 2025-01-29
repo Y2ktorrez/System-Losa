@@ -3,6 +3,8 @@ import tkinter as tk
 from ventas import Ventas
 from cotizacion import Cotizacion
 from PIL import Image, ImageTk
+import sys
+import os
 
 class Container(tk.Frame):  
     def __init__(self, padre, controlador):
@@ -10,6 +12,13 @@ class Container(tk.Frame):
         self.controlador = controlador
         self.pack(fill="both", expand=True)
         self.widgets()
+        
+    def rutas(self, ruta):
+        try:
+            rutabase=sys.__MEIPASS
+        except Exception:
+            rutabase=os.path.abspath(".")
+        return os.path.join(rutabase,ruta)
 
     def show_frames(self, container):
         self.controlador.withdraw()  
@@ -33,7 +42,8 @@ class Container(tk.Frame):
         btncotizacion = Button(frame1, bg="#270ed9", fg="white", font="sans 18 bold", text="Ir a Cotizacion", command=self.cotizacion)
         btncotizacion.place(x=500, y=200, width=240, height=60)
 
-        self.logo_image = Image.open("img/vigueta.png")
+        ruta=self.rutas("img/vigueta.png")
+        self.logo_image = Image.open(ruta)
         self.logo_image = self.logo_image.resize((280, 280))
         self.logo_image = ImageTk.PhotoImage(self.logo_image)
         self.logo_label = tk.Label(frame1, image=self.logo_image, bg="#C6D9E3")
